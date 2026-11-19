@@ -25,7 +25,7 @@
     e.heading.textContent = s.running && s.mode === "focus" ? "You’re in your focus zone" : copy[0];
     e.label.textContent = s.running ? (free ? "FREE TIME IN PROGRESS" : "YOU’RE RIGHT ON TRACK") : copy[1];
     e.subtitle.textContent = s.notice || (s.running ? "Stay with this moment. The rest can wait." : copy[2]);
-    e.toggleLabel.textContent = s.running ? (free ? "Save free time" : "Pause session") : ((!free && s.remaining !== modeLength()) ? "Resume session" : "Start " + (s.mode === "focus" ? "focus" : free ? "free time" : "break"));
+    e.toggleLabel.textContent = s.running ? (free ? "Save free time" : "Pause session") : (free && s.freeElapsed > 0 ? "Resume free time" : (!free && s.remaining !== modeLength() ? "Resume session" : "Start " + (s.mode === "focus" ? "focus" : free ? "free time" : "break")));
     e.toggle.classList.toggle("running", s.running); e.toggle.setAttribute("aria-pressed", String(s.running));
     document.querySelectorAll(".mode-button").forEach(b => { const on = b.dataset.mode === s.mode; b.classList.toggle("active", on); b.setAttribute("aria-pressed", String(on)); b.disabled = s.running; });
     const task = activeTask(); e.currentTask.textContent = s.mode === "focus" ? (task ? task.name : "Choose what you’ll work on") : free ? "No plan needed. Just be here." : "A pause is part of the process.";
